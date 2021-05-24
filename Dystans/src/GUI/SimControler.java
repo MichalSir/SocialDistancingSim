@@ -1,44 +1,45 @@
 package GUI;
 import MODEL.FileManagement;
-import MODEL.SimData;
+import MODEL.Patogen;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+
 
 public class SimControler {
 
     FileManagement fileManagement = new FileManagement();
-    ArrayList<SimData> patogens;
-    int i = 0;
+    ArrayList<Patogen> patogens;
+    HashMap<HBox, ArrayList<String>> patogenMap = new HashMap<>();
     @FXML
     VBox PatogensBox;
     @FXML
     VBox simulationPlan;
     @FXML
+    BorderPane mainPane;
+    @FXML
     Pane pitchPane;
     @FXML
     Pane background;
+
     @FXML
     public void initialize()
     {
         patogens = fileManagement.readJson();
 
-        for (SimData patogen: patogens
+        for (Patogen patogen: patogens
              ) {
-            PatogensBox.getChildren().add(new Button(patogen.name));
+            PatogensBox.getChildren().add(new PatogenBlock(patogen, mainPane, patogenMap) );
 
         }
         addSimulation();
@@ -57,12 +58,6 @@ public class SimControler {
 
     }
 
-  /*  public void addPatogen()
-    {
-        fileManagement.writeJson(new Patogen("Patogen" + i, 10.0));
-        PatogensBox.getChildren().add(new Button("Patogen" + i));
-        i++;
-    }*/
 
     @FXML
     public void addPatogen() {
@@ -77,7 +72,7 @@ public class SimControler {
             stage.setScene(scene);
             stage.show();
             p = fxmlLoader.getController();
-            p.SetEverything(fileManagement, patogens, PatogensBox);
+            p.SetEverything(fileManagement, patogens, PatogensBox, mainPane, patogenMap);
         } catch (IOException e) {
             Logger logger = Logger.getLogger(getClass().getName());
             logger.log(Level.SEVERE, "Failed to create new Window.", e);
@@ -100,6 +95,7 @@ public class SimControler {
        gridPane.add(configPane, 1,1);
        gridPane.add(new Label("Patogeny: "), 0,2);
        HBox patogens = new HBox();
+       patogenMap.put(patogens, new ArrayList<String>());
        patogens.setId("patogens");
        containter.getChildren().add(gridPane);
        containter.getChildren().add(patogens);

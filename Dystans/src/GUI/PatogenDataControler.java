@@ -8,17 +8,23 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.function.UnaryOperator;
 
 public class PatogenDataControler {
 
     FileManagement fileManagement;
-    ArrayList<SimData> patogens;
+    ArrayList<Patogen> patogens;
     VBox PatogensBox;
+    HashMap<HBox, ArrayList<String>> patogenMap;
+    BorderPane mainPane;
 
     boolean[] flags = new boolean[2];
     @FXML
@@ -30,10 +36,13 @@ public class PatogenDataControler {
     @FXML
     Label info2;
 
-    public void SetEverything(FileManagement fileManagement, ArrayList<SimData> patogens, VBox PatogensBox) {
+    public void SetEverything(FileManagement fileManagement, ArrayList<Patogen> patogens, VBox PatogensBox, BorderPane mainPane,HashMap<HBox, ArrayList<String>> patogenMap) {
         this.fileManagement = fileManagement;
         this.patogens = patogens;
         this.PatogensBox = PatogensBox;
+        this.patogenMap = patogenMap;
+        this.mainPane = mainPane;
+
         for (Boolean b: flags
         ) {
             b = false;
@@ -76,7 +85,7 @@ value1.setTextFormatter(new TextFormatter<>(t -> {
         {
             Patogen patogen = new Patogen(name.getText(), Double.parseDouble(value1.getText()));
             fileManagement.writeJson(new Patogen(patogen.name, patogen.propability));
-            PatogensBox.getChildren().add(new Button(name.getText()));
+            PatogensBox.getChildren().add(new PatogenBlock(patogen, mainPane, patogenMap));
             patogens.add(patogen);
             name.setText("");
             value1.setText("");

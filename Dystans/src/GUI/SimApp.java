@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 public class SimApp extends Application {
     @Override
     public void start(Stage primaryStage) {
+        System.out.println(javafx.scene.text.Font.getFamilies());
         try {
             FXMLLoader loader = new FXMLLoader();
             BorderPane root =

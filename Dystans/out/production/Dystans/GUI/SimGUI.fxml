@@ -4,9 +4,9 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="max" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SimControler">
+<BorderPane fx:id="mainPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="max" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SimControler">
     <top>
-        <Label text="Symulator dystansu" BorderPane.alignment="CENTER" />
+        <Label id="title" text="Symulator dystansu" BorderPane.alignment="CENTER" />
     </top>
     <bottom>
         <HBox alignment="TOP_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
@@ -43,7 +43,10 @@
                                  <VBox.margin>
                                     <Insets bottom="10.0" top="10.0" />
                                  </VBox.margin></Button>
-                              <Label prefHeight="17.0" prefWidth="98.0" text="Patogeny:" />
+                              <Label prefHeight="17.0" prefWidth="98.0" text="Patogeny:">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" />
+                                 </VBox.margin></Label>
                            </children></VBox>
                      </children></AnchorPane>
             </content>

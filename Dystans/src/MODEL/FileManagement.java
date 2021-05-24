@@ -27,10 +27,10 @@ public class FileManagement {
         }
 
     }
-    public  ArrayList<SimData> readJson()
+    public  ArrayList<Patogen> readJson()
     {
         final File folder = new File(path);
-        ArrayList<SimData> patogens = new ArrayList<SimData>();
+        ArrayList<Patogen> patogens = new ArrayList<Patogen>();
 
         for(final File fileEntry: folder.listFiles())
         {
