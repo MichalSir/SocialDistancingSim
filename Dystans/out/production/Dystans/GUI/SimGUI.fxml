@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" styleClass="max" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.SimControler">
+    <top>
+        <Label text="Symulator dystansu" BorderPane.alignment="CENTER" />
+    </top>
+    <bottom>
+        <HBox alignment="TOP_CENTER" spacing="5.0" BorderPane.alignment="CENTER">
+            <children>
+                <Button mnemonicParsing="false" onAction="#reset" text="Reset" />
+                <Button mnemonicParsing="false" text="Start" />
+                <Button mnemonicParsing="false" text="Stop" />
+                <Button mnemonicParsing="false" onAction="#step" text="Step" />
+            </children>
+            <BorderPane.margin>
+                <Insets />
+            </BorderPane.margin>
+            <padding>
+                <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+            </padding>
+        </HBox>
+    </bottom>
+    <padding>
+        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+    </padding>
+    <right>
+        <VBox prefHeight="200.0" prefWidth="100.0" BorderPane.alignment="CENTER" />
+    </right>
+   <left>
+      <TabPane tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab text="Patogeny">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <VBox fx:id="PatogensBox">
+                           <children>
+                              <Button mnemonicParsing="false" onAction="#addPatogen" text="Dodaj Patogen">
+                                 <VBox.margin>
+                                    <Insets bottom="10.0" top="10.0" />
+                                 </VBox.margin></Button>
+                              <Label prefHeight="17.0" prefWidth="98.0" text="Patogeny:" />
+                           </children></VBox>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Konfiguracje">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+            </content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </left>
+   <center>
+      <VBox fx:id="simulationPlan" alignment="TOP_CENTER" BorderPane.alignment="TOP_CENTER">
+         <BorderPane.margin>
+            <Insets left="30.0" top="20.0" />
+         </BorderPane.margin></VBox>
+   </center>
+</BorderPane>
